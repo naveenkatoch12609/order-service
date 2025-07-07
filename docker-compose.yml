@@ -1,0 +1,14 @@
+services:
+  order-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: order-service
+    ports:
+      - "8080:8080"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"  # ⬅ for Linux
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:52432/ordersb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password

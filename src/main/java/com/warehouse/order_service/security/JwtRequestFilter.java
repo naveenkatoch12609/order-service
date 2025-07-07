@@ -48,6 +48,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             String jwt = authHeader.substring(7);
             try {
                 Claims claims = jwtUtil.validateToken(jwt);
+                System.out.println(claims.getSubject());
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(
                                 claims.getSubject(), null, new ArrayList<>());

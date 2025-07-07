@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: order-config
+data:
+  POSTGRES_DB: ordersb
+  POSTGRES_USER: postgres
+  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-service:5432/ordersb
