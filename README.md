@@ -17,17 +17,19 @@ A simple microservice for order management, built using **Spring Boot**, contain
 
 ## 🧰 Tech Stack
 
-| Tech            | Role                            |
-|-----------------|----------------------------------|
-| Java 17         | Application runtime              |
-| Spring Boot     | RESTful API microservice         |
-| PostgreSQL      | Database                         |
-| Docker          | Containerization                 |
-| Minikube        | Local Kubernetes cluster         |
-| Kubernetes (k8s)| Container orchestration          |
-| Helm            | Kubernetes package manager       |
-| GitHub Actions  | Continuous integration & delivery|
-| ArgoCD          | GitOps-based CD (optional)       |
+| Tech             | Role                              |
+|------------------|-----------------------------------|
+| Java 17          | Application runtime               |
+| Spring Boot      | RESTful API microservice          |
+| PostgreSQL       | Database                          |
+| Docker           | Containerization                  |
+| Minikube         | Local Kubernetes cluster          |
+| Kubernetes (k8s) | Container orchestration           |
+| Helm             | Kubernetes package manager        |
+| GitHub Actions   | Continuous integration & delivery |
+| ArgoCD           | GitOps-based CD (optional)        |
+
+
 
 ---
 
@@ -45,4 +47,4 @@ kubectl delete -f k8s/
 minikube delete
 
 👨‍💻 Author
-Naveen Kumar
+Naveen K
