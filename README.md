@@ -43,3 +43,6 @@ cd order-service
 helm uninstall order-service
 kubectl delete -f k8s/
 minikube delete
+
+👨‍💻 Author
+Naveen Kumar
