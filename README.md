@@ -38,3 +38,8 @@ A simple microservice for order management, built using **Spring Boot**, contain
 ```bash
 git clone https://github.com/naveenkatoch61/order-service.git
 cd order-service
+
+🧹 Cleanup
+helm uninstall order-service
+kubectl delete -f k8s/
+minikube delete
