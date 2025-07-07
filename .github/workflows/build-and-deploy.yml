@@ -59,22 +59,22 @@ jobs:
       - name: 🚀 Deploy to Kubernetes via Helm
         run: |
           helm upgrade --install order-service ./order-service-chart \
-            --set image.repository=009naveen/order-service \
+            --set image.repository=09naveen/order-service \
             --set image.tag=latest \
             --namespace default
-			
-		- name: 📥 Install ArgoCD CLI
-		  run: |
-			curl -sSL -o argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
-			  chmod +x argocd
-			  sudo mv argocd /usr/local/bin/
 
-		- name: 🔐 Login to ArgoCD
-		  run: |
+      - name: 📥 Install ArgoCD CLI
+        run: |
+          curl -sSL -o argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+          chmod +x argocd
+          sudo mv argocd /usr/local/bin/
+
+      - name: 🔐 Login to ArgoCD
+        run: |
           argocd login ${{ secrets.ARGOCD_SERVER }} \
             --username ${{ secrets.ARGOCD_USERNAME }} \
             --password ${{ secrets.ARGOCD_PASSWORD }} \
             --insecure
 
-	     - name: 🚀 Sync ArgoCD App
-  	       run: argocd app sync order-service
+      - name: 🚀 Sync ArgoCD App
+        run: argocd app sync order-service
