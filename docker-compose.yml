@@ -12,3 +12,5 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:52432/ordersb
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: password
+	  JWT_SECRET: joyo6iW6baFCaYL0r/+qwdCXe7t18lmxtyGHrMsEVP4=
+	  SPRING_SECURITY_PASSWORD: prod_password

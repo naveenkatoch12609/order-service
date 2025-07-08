@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: order-service
+  repository: 09naveen/order-service
   tag: latest
   pullPolicy: IfNotPresent
 
@@ -21,7 +21,7 @@ securityContext: {}
 service:
   type: NodePort
   port: 8080
-  nodePort: 30081
+  nodePort: 30082
 
 ingress:
   enabled: false
@@ -56,6 +56,33 @@ tolerations: []
 affinity: {}
 
 env:
-  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-service:5432/ordersb
-  SPRING_DATASOURCE_USERNAME: postgres
-  SPRING_DATASOURCE_PASSWORD: password
+  - name: SPRING_PROFILES_ACTIVE
+    value: prod
+  - name: SPRING_CONFIG_IMPORT
+    value: optional:configserver:http://config-server:8888
+  - name: SPRING_DATASOURCE_URL
+    valueFrom:
+      configMapKeyRef:
+        name: order-config
+        key: SPRING_DATASOURCE_URL
+  - name: SPRING_DATASOURCE_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: db-secret
+        key: POSTGRES_USER
+  - name: SPRING_DATASOURCE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: db-secret
+        key: POSTGRES_PASSWORD
+  - name: SPRING_SECURITY_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: app-secrets
+        key: SPRING_SECURITY_PASSWORD
+  - name: JWT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: app-secrets
+        key: JWT_SECRET
+

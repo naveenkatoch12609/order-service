@@ -1,3 +1,15 @@
+# Use a lightweight OpenJDK base image
+FROM eclipse-temurin:17-jdk as builder
+
+# Set working directory
+WORKDIR /app
+
+# Copy your Maven/Gradle wrapper files and project files
+COPY . .
+
+# Build the Spring Boot JAR using Maven (skip tests for speed)
+RUN ./mvnw clean package -DskipTests
+
 # 1. Use a base image with Java 17
 FROM eclipse-temurin:17-jdk
 
@@ -11,4 +23,4 @@ COPY target/order-service-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
 
 # 5. Command to run your app
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "order-service.jar"]
