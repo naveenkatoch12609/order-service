@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: 09naveen/order-service
+  repository: order-service
   tag: latest
   pullPolicy: IfNotPresent
 
@@ -21,7 +21,7 @@ securityContext: {}
 service:
   type: NodePort
   port: 8080
-  nodePort: 30082
+  nodePort: 30081
 
 ingress:
   enabled: false
@@ -59,7 +59,7 @@ env:
   - name: SPRING_PROFILES_ACTIVE
     value: prod
   - name: SPRING_CONFIG_IMPORT
-    value: optional:configserver:http://config-server:8888
+    value: configserver:http://config-server:8888
   - name: SPRING_DATASOURCE_URL
     valueFrom:
       configMapKeyRef:
@@ -85,4 +85,3 @@ env:
       secretKeyRef:
         name: app-secrets
         key: JWT_SECRET
-
