@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ .Chart.Name }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: {{ .Chart.Name }}
@@ -18,6 +18,15 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: 8080
-env:
-  - name: SPRING_PROFILES_ACTIVE
-    value: {{ .Values.env.SPRING_PROFILES_ACTIVE | quote }}
+          env:
+{{- range $env := .Values.env }}
+            - name: {{ $env.name }}
+{{- if $env.value }}
+              value: {{ $env.value | quote }}
+{{- end }}
+{{- if $env.valueFrom }}
+              valueFrom:
+{{ toYaml $env.valueFrom | indent 16 }}
+{{- end }}
+{{- end }}
+

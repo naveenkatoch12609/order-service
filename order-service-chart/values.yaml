@@ -1,27 +1,13 @@
 replicaCount: 1
 
-image:
-  repository: order-service
-  tag: latest
-  pullPolicy: IfNotPresent
-
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
-
-serviceAccount:
-  create: false
-  name: ""
-
-podAnnotations: {}
-
-podSecurityContext: {}
-securityContext: {}
-
 service:
   type: NodePort
   port: 8080
   nodePort: 30081
+
+serviceAccount:
+  create: false
+  name: ""
 
 ingress:
   enabled: false
@@ -34,26 +20,16 @@ ingress:
           pathType: ImplementationSpecific
   tls: []
 
-resources: {}
-# Example:
-#   limits:
-#     cpu: 200m
-#     memory: 256Mi
-#   requests:
-#     cpu: 100m
-#     memory: 128Mi
-
 autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 3
   targetCPUUtilizationPercentage: 80
 
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
+image:
+  repository: order-service
+  tag: latest
+  pullPolicy: IfNotPresent
 
 env:
   - name: SPRING_PROFILES_ACTIVE
@@ -68,18 +44,3 @@ env:
       secretKeyRef:
         name: db-secret
         key: POSTGRES_USER
-  - name: SPRING_DATASOURCE_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: db-secret
-        key: POSTGRES_PASSWORD
-  - name: SPRING_SECURITY_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: app-secrets
-        key: SPRING_SECURITY_PASSWORD
-  - name: JWT_SECRET
-    valueFrom:
-      secretKeyRef:
-        name: app-secrets
-        key: JWT_SECRET

@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: order-service
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/naveenkatoch12609/order-service.git
+    targetRevision: HEAD
+    path: order-service-chart   # ⬅️ folder containing Chart.yaml and values.yaml
+    helm:
+      valueFiles:
+        - values.yaml           # ⬅️ loads env and all config
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
