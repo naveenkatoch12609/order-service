@@ -56,10 +56,30 @@ tolerations: []
 affinity: {}
 
 env:
-  SPRING_PROFILES_ACTIVE: prod
-  SPRING_CONFIG_IMPORT: configserver:http://config-server:8888
-  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-service:5432/ordersb
-  SPRING_DATASOURCE_USERNAME: postgres
-  SPRING_DATASOURCE_PASSWORD: password
-  SPRING_SECURITY_PASSWORD: mysecureadminpass
-  JWT_SECRET: joyo6iW6baFCaYL0r/+qwdCXe7t18lmxtyGHrMsEVP4=
+  - name: SPRING_PROFILES_ACTIVE
+    value: prod
+  - name: SPRING_DATASOURCE_URL
+    valueFrom:
+      configMapKeyRef:
+        name: order-config
+        key: SPRING_DATASOURCE_URL
+  - name: SPRING_DATASOURCE_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: db-secret
+        key: POSTGRES_USER
+  - name: SPRING_DATASOURCE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: db-secret
+        key: POSTGRES_PASSWORD
+  - name: SPRING_SECURITY_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: app-secrets
+        key: SPRING_SECURITY_PASSWORD
+  - name: JWT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: app-secrets
+        key: JWT_SECRET
