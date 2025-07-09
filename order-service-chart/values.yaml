@@ -27,7 +27,7 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
 
 image:
-  repository: order-service
+  repository: 09naveen/order-service
   tag: latest
   pullPolicy: IfNotPresent
 
