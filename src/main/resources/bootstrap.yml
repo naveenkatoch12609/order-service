@@ -1,6 +1,9 @@
 spring:
   application:
     name: order-service
+  profiles:
+    active: prod
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: http://config-server.default.svc.cluster.local:8888
+      fail-fast: true

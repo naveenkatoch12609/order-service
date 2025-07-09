@@ -6,7 +6,7 @@ spring:
     active: dev
   
   config:
-    import: optional:"http://config-server.default.svc.cluster.local:8888"
+    import: optional:configserver:http://localhost:8888
 
 management:
   endpoints:
