@@ -20,7 +20,7 @@ WORKDIR /app
 COPY --from=builder /app/target/order-service-*.jar order-service.jar
 
 # Expose the config server port
-EXPOSE 8888
+EXPOSE 8080
 
 # Set entrypoint to run the Spring Boot app
 ENTRYPOINT ["java", "-jar", "order-service.jar"]
