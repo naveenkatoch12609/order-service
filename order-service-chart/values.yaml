@@ -42,13 +42,13 @@ env:
   - name: SPRING_DATASOURCE_USERNAME
     valueFrom:
       secretKeyRef:
-        name: my-db-secret
-        key: postgres_user
+        name: db-secret
+        key: POSTGRES_USER
   - name: SPRING_DATASOURCE_PASSWORD
     valueFrom:
       secretKeyRef:
-        name: my-db-secret
-        key: postgres_password
+        name: db-secret
+        key: POSTGRES_PASSWORD
   - name: SPRING_SECURITY_PASSWORD
     valueFrom:
       secretKeyRef:
