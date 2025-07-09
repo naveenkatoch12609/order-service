@@ -1,0 +1,19 @@
+auth:
+  existingSecret: db-secret
+  secretKeys:
+    postgresPasswordKey: POSTGRES_PASSWORD
+    passwordKey: POSTGRES_PASSWORD
+  username: postgres
+  database: ordersb
+
+primary:
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: 500m
+      memory: 1Gi
+
+metrics:
+  enabled: true

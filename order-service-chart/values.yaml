@@ -34,16 +34,13 @@ image:
 env:
   - name: SPRING_PROFILES_ACTIVE
     value: prod
+  - name: SPRING_DATASOURCE_USERNAME
+    value: postgres
   - name: SPRING_DATASOURCE_URL
     valueFrom:
       configMapKeyRef:
         name: order-config
         key: SPRING_DATASOURCE_URL
-  - name: SPRING_DATASOURCE_USERNAME
-    valueFrom:
-      secretKeyRef:
-        name: db-secret
-        key: POSTGRES_USER
   - name: SPRING_DATASOURCE_PASSWORD
     valueFrom:
       secretKeyRef:
