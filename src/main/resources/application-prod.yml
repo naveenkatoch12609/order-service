@@ -1,3 +1,26 @@
 spring:
-  config:
-    import: http://config-server.default.svc.cluster.local:8888
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+
+  security:
+    user:
+      name: admin
+      password: ${SPRING_SECURITY_PASSWORD}
+
+jwt:
+  secret: ${JWT_SECRET}
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework.security: WARN
+    com.warehouse.order_service.filter: INFO
