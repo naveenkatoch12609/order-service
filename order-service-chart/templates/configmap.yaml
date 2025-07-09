@@ -3,4 +3,5 @@ kind: ConfigMap
 metadata:
   name: order-config
 data:
-  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-service:5432/ordersb
+  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-postgresql:5432/ordersb
+
