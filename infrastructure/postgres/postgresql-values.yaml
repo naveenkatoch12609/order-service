@@ -1,10 +1,14 @@
+metrics:
+  enabled: true
+
 auth:
-  existingSecret: db-secret
+  existingSecret: my-db-secret
   secretKeys:
-    postgresPasswordKey: POSTGRES_PASSWORD
-    passwordKey: POSTGRES_PASSWORD
+    postgresPasswordKey: postgres-password
+    passwordKey: password
   username: postgres
   database: ordersb
+
 
 primary:
   resources:
