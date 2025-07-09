@@ -5,10 +5,8 @@ auth:
   existingSecret: my-db-secret
   secretKeys:
     postgresPasswordKey: postgres-password
-    passwordKey: password
   username: postgres
   database: ordersb
-
 
 primary:
   resources:
@@ -21,3 +19,7 @@ primary:
 
 metrics:
   enabled: true
+
+image:
+  repository: bitnami/postgresql
+  tag: 15.6.0-debian-11-r5

@@ -1,14 +1,26 @@
-# 1. Use a base image with Java 17
-FROM eclipse-temurin:17-jdk
+# Use a lightweight OpenJDK base image
+FROM eclipse-temurin:17-jdk as builder
 
-# 2. Set working directory inside the container
+# Set working directory
 WORKDIR /app
 
-# 3. Copy your built JAR file into the container
-COPY target/order-service-0.0.1-SNAPSHOT.jar app.jar
+# Copy your Maven/Gradle wrapper files and project files
+COPY . .
 
-# 4. Expose the port your app uses
-EXPOSE 8080
+# Build the Spring Boot JAR using Maven (skip tests for speed)
+RUN ./mvnw clean package -DskipTests
 
-# 5. Command to run your app
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# ---- Create final image ----
+FROM eclipse-temurin:17-jdk
+
+# Create app directory
+WORKDIR /app
+
+# Copy the fat JAR from the builder image
+COPY --from=builder /app/target/order-service-*.jar order-service.jar
+
+# Expose the config server port
+EXPOSE 8888
+
+# Set entrypoint to run the Spring Boot app
+ENTRYPOINT ["java", "-jar", "order-service.jar"]
