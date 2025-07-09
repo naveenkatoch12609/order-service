@@ -1,0 +1,41 @@
+# gitops/base/postgres/application.yaml
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgres
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/<your-org>/<your-repo>.git
+    targetRevision: HEAD
+    path: base/postgres
+    helm:
+      chart: postgresql
+      repoURL: https://charts.bitnami.com/bitnami
+      values: |
+        auth:
+          username: postgres
+          database: ordersb
+          existingSecret: my-db-secret
+          secretKeys:
+            postgresPasswordKey: postgres-password
+            passwordKey: password
+        primary:
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
+        metrics:
+          enabled: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
