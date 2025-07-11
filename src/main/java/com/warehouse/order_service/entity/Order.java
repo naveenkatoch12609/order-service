@@ -25,6 +25,8 @@ public class Order {
 
 	private String customerName;
 
+	private String status;
+	
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference
 	private List<OrderItem> items = new ArrayList<>();
@@ -62,5 +64,15 @@ public class Order {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	
 
 }

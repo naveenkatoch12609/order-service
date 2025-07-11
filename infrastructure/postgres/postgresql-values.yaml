@@ -17,9 +17,6 @@ primary:
       cpu: 500m
       memory: 1Gi
 
-metrics:
-  enabled: true
-
 image:
   repository: bitnami/postgresql
   tag: 15.6.0-debian-11-r5

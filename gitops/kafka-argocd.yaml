@@ -1,0 +1,25 @@
+# kafka-argocd.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kafka
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: kafka
+    targetRevision: 26.3.2       # Use the latest compatible version
+    helm:
+      values: |
+        replicaCount: 1
+        auth.enabled: false
+        zookeeper.replicaCount: 1
+        persistence.enabled: false
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kafka
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
